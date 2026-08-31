@@ -8,29 +8,25 @@ def perceptron(inputs, weights, threshold):
         return 1
     return 0
 
-# X = 1
-# Y = 0
-# Z = 1
-# A = 0
 
-
-test_cases = [
-    (0, 0, 0, 0),
-    (1, 1, 0, 1),
-    (0, 0, 1, 1),
-    (0, 1, 0, 1)
-]
-
-for X, Y, Z, A in test_cases:
+def circuit(X,Y,Z,A):
     p1 = perceptron([X, Y], [1, 1], 2)
     p2 = perceptron([X, Z], [1, 1], 2)
     p3 = perceptron([Y, A], [-1, 1], 1)
-    p4 = perceptron([X, Z, A], [1, 1, 1], 2)
+    p4 = perceptron([X, Z, A], [-1, 1, 1], 2)
 
     p5 = perceptron([p1, p2], [1, -1], 0)
     p6 = perceptron([p3, p4], [1, 1], 1)
 
     p7 = perceptron([p5, p6], [1, 1], 2)
 
-    print(X, Y, Z, A, "->", p7)
+    return p7
+
+
+print(" ------------------ Complete Truth Table ------------------")
+for X in [0,1]:
+    for Y in [0,1]:
+        for Z in [0,1]:
+            for A in [0,1]:
+                print(f"X={X}, Y={Y}, Z={Z}, A={A} -> Output={circuit(X,Y,Z,A)}")
 
