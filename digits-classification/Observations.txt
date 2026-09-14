@@ -1,0 +1,3 @@
+"The neural network achieved 95.3% accuracy while logistic regression achieved 97.2%. This gap is explained by logistic regression using cross-entropy loss, softmax normalization, and the L-BFGS optimizer (a 2nd-order method), whereas my NN uses MSE loss, sigmoid activations, and plain gradient descent. Logistic regression also trains until true convergence, while my NN is limited to 1000 epochs.
+
+I observed that smaller learning rates worsened performance, and more epochs generally improved accuracy. The NN also took longer to train due to Python loops in the forward pass and the slower 1st-order optimizer. These results align with Section 6's discussion of gradient descent pitfalls and motivate using momentum or adaptive methods for faster convergence."
