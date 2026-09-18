@@ -16,6 +16,23 @@ def deriv_sigmoid(x):
     s = sigmoid(x)
     return s * (1 - s)
 
+# 9. Mean Squared Error Loss
+def mse_loss(y_true, y_pred):
+    """
+    :type y_true: numpy.ndarray, shape (n,)
+    :type y_pred: numpy.ndarray, shape (n,)
+    :rtype: float — mean squared error across all samples
+    """
+    # mse = ((y_true - y_pred) ** 2).mean()
+
+    mse = 0
+    n = len(y_true)
+    for i in range(n):
+        mse += (y_true[i] - y_pred[i]) ** 2
+    mse /= n
+
+    return mse
+
 # 7. Single Neuron Feedforward
 class Neuron:
     def __init__(self, weights, bias):
