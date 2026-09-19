@@ -1,3 +1,5 @@
+import numpy as np
+
 # 6.Sigmoid Activation and Derivative
 def sigmoid(x):
     """
@@ -64,20 +66,37 @@ class OurNeuralNetwork:
         All three neurons share the same weights w = [0, 1] and bias b = 0.
         Creates: self.h1, self.h2, self.o1 (all Neuron instances)
         """
-        weights = [0, 1]
-        self.h1 = Neuron(weights, 0)
-        self.h2 = Neuron(weights, 0)
-        self.o1 = Neuron(weights, 0)
+        self.w1 = np.random.normal()
+        self.w2 = np.random.normal()
+        self.w3 = np.random.normal()
+        self.w4 = np.random.normal()
+        self.w5 = np.random.normal()
+        self.w6 = np.random.normal()
+        self.b1 = np.random.normal()
+        self.b2 = np.random.normal()
+        self.b3 = np.random.normal()
 
     def feedforward(self, x):
         """
         :type x: numpy.ndarray, shape (2,)
-        :rtype: float — the network's final output
+        :rtype: tuple (o1, sum_h1, h1, sum_h2, h2, sum_o1)
         """
-        
-        out_h1 = self.h1.feedforward(x)
-        out_h2 = self.h2.feedforward(x)
+        # Hidden neuron h1
+        sum_h1 = self.w1 * x[0] + self.w2 * x[1] + self.b1
+        h1 = sigmoid(sum_h1)
 
-        nx = np.array([out_h1, out_h2])
+        # Hidden neuron h2
+        sum_h2 = self.w3 * x[0] + self.w4 * x[1] + self.b2
+        h2 = sigmoid(sum_h2)
 
-        return self.o1.feedforward(nx)
+        # Output neuron o1
+        sum_o1 = self.w5 * h1 + self.w6 * h2 + self.b3
+        o1 = sigmoid(sum_o1)
+
+        return o1, sum_h1, h1, sum_h2, h2, sum_o1
+
+
+
+net = OurNeuralNetwork()
+o1, sh1, h1, sh2, h2, so1 = net.feedforward(np.array([-2, -1]))
+print(f"o1 = {o1:.4f}")
